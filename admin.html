@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="bn" class="h-full bg-slate-900 text-slate-100">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lucceass Telecom Server | সুপার অ্যাডমিন কন্ট্রোল প্যানেল</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Font Hind Siliguri -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Hind Siliguri"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e3a8a',
+              900: '#0f172a'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Hind Siliguri', sans-serif; }
+    .glass-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+    .table-row:hover { background-color: rgba(51, 65, 85, 0.5); }
+    /* Custom scrollbars */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.6); }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 9999px; }
+  </style>
+</head>
+<body class="min-h-full flex flex-col bg-[#0B0F19] text-slate-100 selection:bg-cyan-500 selection:text-white">
+
+  <!-- ==================== 1. ADMIN LOGIN VIEW ==================== -->
+  <div id="admin-login-view" class="flex-1 flex items-center justify-center p-4">
+    <div class="glass-card w-full max-w-md rounded-3xl p-8 shadow-2xl relative overflow-hidden border border-slate-800">
+      <div class="pointer-events-none absolute -right-12 -top-12 w-40 h-40 bg-blue-600/20 rounded-full blur-3xl"></div>
+      <div class="pointer-events-none absolute -left-12 -bottom-12 w-40 h-40 bg-cyan-500/20 rounded-full blur-3xl"></div>
+
+      <!-- Server Header -->
+      <div class="text-center mb-6 relative z-10">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-700 via-indigo-600 to-cyan-500 mx-auto flex items-center justify-center text-3xl font-black shadow-xl shadow-blue-500/30 mb-3 text-white">
+          🛡️
+        </div>
+        <h1 class="text-xl font-bold tracking-tight text-white">Lucceass Telecom Server</h1>
+        <p class="text-xs text-cyan-400 font-semibold mt-0.5">সুপার অ্যাডমিন কন্ট্রোল প্যানেল</p>
+        <span class="inline-block mt-2 px-3 py-0.5 rounded-full text-[10px] bg-slate-800 border border-slate-700 text-slate-300">
+          🟢 সিকিউর সার্ভার গেটওয়ে v2.4
+        </span>
+      </div>
+
+      <!-- Login Form -->
+      <form onsubmit="handleAdminLogin(event)" class="space-y-4 relative z-10">
+        <div>
+          <label class="block text-xs font-bold text-slate-300 mb-1.5">অ্যাডমিন ইউজারনেম</label>
+          <div class="relative">
+            <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500">👤</span>
+            <input type="text" id="adm-user" placeholder="admin" required class="w-full bg-slate-800/80 border border-slate-700 rounded-xl pl-10 pr-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-300 mb-1.5">অ্যাডমিন পাসওয়ার্ড</label>
+          <div class="relative">
+            <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500">🔒</span>
+            <input type="password" id="adm-pass" placeholder="•••••" required class="w-full bg-slate-800/80 border border-slate-700 rounded-xl pl-10 pr-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition">
+          </div>
+        </div>
+
+        <button type="submit" id="btn-admin-login" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 text-white font-bold text-sm shadow-lg shadow-blue-500/25 hover:opacity-95 active:scale-[0.98] transition">
+          সার্ভারে প্রবেশ করুন
+        </button>
+
+        <div class="text-center pt-2">
+          <a href="/" class="text-xs text-slate-400 hover:text-cyan-400 transition flex items-center justify-center gap-1">
+            ← গ্রাহক ও রিটেইলার পোর্টালে যান
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== 2. MAIN ADMIN WORKSPACE ==================== -->
+  <div id="admin-workspace-view" class="hidden flex-1 flex flex-col">
+    
+    <!-- Top Navbar -->
+    <header class="bg-slate-900/90 border-b border-slate-800 backdrop-blur-md sticky top-0 z-40 px-4 py-3">
+      <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+        
+        <!-- Logo & Server Status -->
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-700 to-cyan-500 flex items-center justify-center text-xl font-bold shadow-md text-white">
+            🛡️
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h2 class="text-sm font-bold text-white">Lucceass Telecom Server</h2>
+              <span class="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-950/80 border border-emerald-800 text-emerald-400">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                সার্ভার অনলাইন
+              </span>
+            </div>
+            <p class="text-[11px] text-slate-400">অ্যাডমিন ড্যাশবোর্ড • আপটাইম ৯৯.৯৮%</p>
+          </div>
+        </div>
+
+        <!-- Right Action Items -->
+        <div class="flex items-center gap-2.5">
+          <a href="/" target="_blank" class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-semibold text-cyan-400 transition">
+            <span>🌐</span> ইউজার সাইট
+          </a>
+          <button onclick="refreshAdminData()" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 transition" title="ডেটা রিফ্রেশ করুন">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+          </button>
+          <div class="flex items-center gap-2 pl-2 border-l border-slate-800">
+            <span class="text-xs font-bold text-amber-300">👑 <span id="admin-name-badge">সুপার অ্যাডমিন</span></span>
+            <button onclick="handleAdminLogout()" class="px-3 py-1.5 rounded-lg bg-rose-950/60 hover:bg-rose-900 border border-rose-800 text-rose-300 text-xs font-bold transition">
+              লগআউট
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- Admin Sub-Navigation Tabs -->
+    <nav class="bg-slate-900/60 border-b border-slate-800/80 px-4 overflow-x-auto no-scrollbar">
+      <div class="max-w-7xl mx-auto flex items-center space-x-1 sm:space-x-2 py-2">
+        <button onclick="switchAdminTab('overview')" id="tab-btn-overview" class="admin-tab-btn active px-4 py-2 rounded-xl text-xs font-bold bg-blue-600 text-white flex items-center gap-1.5 transition flex-shrink-0">
+          <span>📊</span> ড্যাশবোর্ড
+        </button>
+        <button onclick="switchAdminTab('users')" id="tab-btn-users" class="admin-tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-800/80 hover:bg-slate-800 text-slate-300 flex items-center gap-1.5 transition flex-shrink-0">
+          <span>👥</span> ইউজার ও রিটেইলার <span id="badge-users-count" class="px-1.5 py-0.2 rounded-full text-[10px] bg-cyan-950 text-cyan-300 border border-cyan-800">০</span>
+        </button>
+        <button onclick="switchAdminTab('recharges')" id="tab-btn-recharges" class="admin-tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-800/80 hover:bg-slate-800 text-slate-300 flex items-center gap-1.5 transition flex-shrink-0">
+          <span>⚡</span> রিচার্জ হিস্ট্রি
+        </button>
+        <button onclick="switchAdminTab('deposits')" id="tab-btn-deposits" class="admin-tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-800/80 hover:bg-slate-800 text-slate-300 flex items-center gap-1.5 transition flex-shrink-0">
+          <span>💳</span> অ্যাড মানি অনুমোদন <span id="badge-pending-deposits" class="px-1.5 py-0.2 rounded-full text-[10px] bg-amber-950 text-amber-300 border border-amber-800">০</span>
+        </button>
+        <button onclick="switchAdminTab('notice')" id="tab-btn-notice" class="admin-tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-800/80 hover:bg-slate-800 text-slate-300 flex items-center gap-1.5 transition flex-shrink-0">
+          <span>📢</span> নোটিশ কন্ট্রোল
+        </button>
+        <button onclick="switchAdminTab('settings')" id="tab-btn-settings" class="admin-tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-800/80 hover:bg-slate-800 text-slate-300 flex items-center gap-1.5 transition flex-shrink-0">
+          <span>⚙️</span> মডেম ও গেটওয়ে
+        </button>
+        <button onclick="switchAdminTab('bundles')" id="tab-btn-bundles" class="admin-tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-800/80 hover:bg-slate-800 text-slate-300 flex items-center gap-1.5 transition flex-shrink-0">
+          <span>📦</span> বান্ডেল ও ড্রাইভ
+        </button>
+        <button onclick="switchAdminTab('games')" id="tab-btn-games" class="admin-tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-800/80 hover:bg-slate-800 text-slate-300 flex items-center gap-1.5 transition flex-shrink-0">
+          <span>🎮</span> গেম প্যাকেজ
+        </button>
+        <button onclick="switchAdminTab('shop')" id="tab-btn-shop" class="admin-tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-800/80 hover:bg-slate-800 text-slate-300 flex items-center gap-1.5 transition flex-shrink-0">
+          <span>🛍️</span> শপ প্রোডাক্ট
+        </button>
+      </div>
+    </nav>
+
+    <!-- Main Tab Content Container -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 space-y-6">
+      
+      <!-- ==================== TAB 1: OVERVIEW ==================== -->
+      <section id="tab-content-overview" class="admin-tab-content space-y-6">
+        
+        <!-- 4 Key Metric Cards -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Total Retailers -->
+          <div class="glass-card rounded-2xl p-4.5 border border-slate-800 relative overflow-hidden">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-slate-400">মোট রিটেইলার</span>
+              <span class="p-2 rounded-xl bg-blue-950 text-blue-400 text-base">👥</span>
+            </div>
+            <h3 id="stat-total-users" class="text-2xl font-black text-white">০</h3>
+            <p class="text-[11px] text-cyan-400 mt-1 font-medium">নিবন্ধিত অ্যাকাউন্ট</p>
+          </div>
+
+          <!-- Total User Balances -->
+          <div class="glass-card rounded-2xl p-4.5 border border-slate-800 relative overflow-hidden">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-slate-400">গ্রাহকদের মোট ব্যালেন্স</span>
+              <span class="p-2 rounded-xl bg-emerald-950 text-emerald-400 text-base">৳</span>
+            </div>
+            <h3 id="stat-total-balance" class="text-2xl font-black text-emerald-400">৳০.০০</h3>
+            <p class="text-[11px] text-slate-400 mt-1 font-medium">রিচার্জ ও ড্রাইভ রিজার্ভ</p>
+          </div>
+
+          <!-- Today's Recharge Total -->
+          <div class="glass-card rounded-2xl p-4.5 border border-slate-800 relative overflow-hidden">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-slate-400">আজকের রিচার্জ</span>
+              <span class="p-2 rounded-xl bg-cyan-950 text-cyan-400 text-base">⚡</span>
+            </div>
+            <h3 id="stat-today-recharge" class="text-2xl font-black text-cyan-400">৳০.০০</h3>
+            <p id="stat-today-count" class="text-[11px] text-slate-400 mt-1 font-medium">০ টি সফল লেনদেন</p>
+          </div>
+
+          <!-- Pending Requests -->
+          <div class="glass-card rounded-2xl p-4.5 border border-slate-800 relative overflow-hidden">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-slate-400">পেন্ডিং ডিপোজিট</span>
+              <span class="p-2 rounded-xl bg-amber-950 text-amber-400 text-base">⏳</span>
+            </div>
+            <h3 id="stat-pending-deposits" class="text-2xl font-black text-amber-400">০</h3>
+            <p class="text-[11px] text-amber-300/80 mt-1 font-medium">অ্যাড মানি যাচাই প্রয়োজন</p>
+          </div>
+        </div>
+
+        <!-- SIM Modem Server Gateway Cards (5 Slots) -->
+        <div class="glass-card rounded-3xl p-5 border border-slate-800">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="font-bold text-sm text-white flex items-center gap-2">
+                <span>📶</span> টেলিকম অটো-রিচার্জ সিম মডেম গেটওয়ে (Slot 1-5)
+              </h3>
+              <p class="text-xs text-slate-400">সার্ভারে সংযুক্ত অপারেটর সিম কার্ডের লাইভ সিগন্যাল ও ব্যালেন্স</p>
+            </div>
+            <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-950 border border-emerald-800 text-emerald-400 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> ৫টি স্লট সক্রিয়
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5" id="modem-slots-container">
+            <!-- Dynamically populated or default fallback -->
+          </div>
+        </div>
+
+        <!-- Quick Summary Tables -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          
+          <!-- Recent Registered Retailers -->
+          <div class="glass-card rounded-3xl p-5 border border-slate-800">
+            <div class="flex items-center justify-between mb-3.5">
+              <h4 class="font-bold text-sm text-white flex items-center gap-2">
+                <span>👥</span> সাম্প্রতিক ইউজার
+              </h4>
+              <button onclick="switchAdminTab('users')" class="text-xs font-bold text-cyan-400 hover:underline">
+                সকল ইউজার দেখুন →
+              </button>
+            </div>
+            <div id="overview-recent-users" class="space-y-2">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+          <!-- Recent Transactions -->
+          <div class="glass-card rounded-3xl p-5 border border-slate-800">
+            <div class="flex items-center justify-between mb-3.5">
+              <h4 class="font-bold text-sm text-white flex items-center gap-2">
+                <span>⇄</span> সাম্প্রতিক লেনদেন
+              </h4>
+              <button onclick="switchAdminTab('recharges')" class="text-xs font-bold text-cyan-400 hover:underline">
+                সকল লেনদেন →
+              </button>
+            </div>
+            <div id="overview-recent-tx" class="space-y-2">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- ==================== TAB 2: USERS & RETAILERS ==================== -->
+      <section id="tab-content-users" class="admin-tab-content hidden space-y-4">
+        
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+          <div>
+            <h3 class="text-base font-bold text-white">রিটেইলার ও ইউজার ম্যানেজমেন্ট</h3>
+            <p class="text-xs text-slate-400">নিবন্ধিত গ্রাহকদের ব্যালেন্স লোড, রোল পরিবর্তন ও কন্ট্রোল করুন</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <input type="text" id="user-search-input" onkeyup="filterUsersTable()" placeholder="নাম বা নম্বর দিয়ে সার্চ..." class="bg-slate-800 border border-slate-700 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-cyan-500">
+            <button onclick="fetchAdminUsers()" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300 border border-slate-700">
+              রিফ্রেশ
+            </button>
+          </div>
+        </div>
+
+        <div class="glass-card rounded-3xl border border-slate-800 overflow-hidden shadow-xl">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-800/80 text-slate-400 uppercase text-[10px] tracking-wider border-b border-slate-700">
+                <tr>
+                  <th class="px-4 py-3">ইউজার / রিটেইলার</th>
+                  <th class="px-4 py-3">মোবাইল নম্বর</th>
+                  <th class="px-4 py-3">লেভেল (রোল)</th>
+                  <th class="px-4 py-3">রিচার্জ ব্যালেন্স</th>
+                  <th class="px-4 py-3">ড্রাইভ ব্যালেন্স</th>
+                  <th class="px-4 py-3">স্ট্যাটাস</th>
+                  <th class="px-4 py-3 text-right">অ্যাকশন</th>
+                </tr>
+              </thead>
+              <tbody id="users-table-body" class="divide-y divide-slate-800/80">
+                <!-- Dynamically rendered -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ==================== TAB 3: RECHARGE TRANSACTIONS ==================== -->
+      <section id="tab-content-recharges" class="admin-tab-content hidden space-y-4">
+        
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-base font-bold text-white">রিচার্জ ও বিল পেমেন্ট হিস্ট্রি</h3>
+            <p class="text-xs text-slate-400">সার্ভারের সকল রিকোয়েস্টের লাইভ লগ ও স্ট্যাটাস কন্ট্রোল</p>
+          </div>
+          <button onclick="fetchAdminTransactions()" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300 border border-slate-700">
+            রিফ্রেশ
+          </button>
+        </div>
+
+        <div class="glass-card rounded-3xl border border-slate-800 overflow-hidden shadow-xl">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-800/80 text-slate-400 uppercase text-[10px] tracking-wider border-b border-slate-700">
+                <tr>
+                  <th class="px-4 py-3">Trx ID</th>
+                  <th class="px-4 py-3">ইউজার</th>
+                  <th class="px-4 py-3">টার্গেট নম্বর</th>
+                  <th class="px-4 py-3">ধরন / অপারেটর</th>
+                  <th class="px-4 py-3">টাকার পরিমাণ</th>
+                  <th class="px-4 py-3">সময়</th>
+                  <th class="px-4 py-3">স্ট্যাটাস</th>
+                  <th class="px-4 py-3 text-right">কন্ট্রোল</th>
+                </tr>
+              </thead>
+              <tbody id="transactions-table-body" class="divide-y divide-slate-800/80">
+                <!-- Dynamically rendered -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ==================== TAB 4: DEPOSITS & ADD MONEY APPROVAL ==================== -->
+      <section id="tab-content-deposits" class="admin-tab-content hidden space-y-4">
+        
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-base font-bold text-white">অ্যাড মানি ও ব্যাংক ডিপোজিট অনুমোদন</h3>
+            <p class="text-xs text-slate-400">গ্রাহকদের বিকাশ/নগদ/রকেট TrxID যাচাই করে ব্যালেন্স অনুমোদন দিন</p>
+          </div>
+          <button onclick="fetchAdminDeposits()" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300 border border-slate-700">
+            রিফ্রেশ
+          </button>
+        </div>
+
+        <div class="glass-card rounded-3xl border border-slate-800 overflow-hidden shadow-xl">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-800/80 text-slate-400 uppercase text-[10px] tracking-wider border-b border-slate-700">
+                <tr>
+                  <th class="px-4 py-3">আইডি</th>
+                  <th class="px-4 py-3">রিটেইলার</th>
+                  <th class="px-4 py-3">মেথড</th>
+                  <th class="px-4 py-3">টাকার পরিমাণ</th>
+                  <th class="px-4 py-3">TrxID কোড</th>
+                  <th class="px-4 py-3">ব্যালেন্স টাইপ</th>
+                  <th class="px-4 py-3">স্ট্যাটাস</th>
+                  <th class="px-4 py-3 text-right">অনুমোদন</th>
+                </tr>
+              </thead>
+              <tbody id="deposits-table-body" class="divide-y divide-slate-800/80">
+                <!-- Dynamically rendered -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ==================== TAB 5: NOTICE BOARD EDITOR ==================== -->
+      <section id="tab-content-notice" class="admin-tab-content hidden space-y-4">
+        
+        <div class="glass-card rounded-3xl p-6 border border-slate-800 max-w-2xl mx-auto space-y-4">
+          <div class="border-b border-slate-800 pb-3">
+            <h3 class="text-base font-bold text-white flex items-center gap-2">
+              <span>📢</span> অ্যাপ পপআপ নোটিশ কন্ট্রোল
+            </h3>
+            <p class="text-xs text-slate-400">ইউজারদের অ্যাপে লগইন করার পর প্রদর্শিত নোটিশ পরিবর্তন করুন</p>
+          </div>
+
+          <form onsubmit="handleSaveNotice(event)" class="space-y-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-300 mb-1.5">নোটিশ শিরোনাম (Title)</label>
+              <input type="text" id="adm-notice-title" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-cyan-500">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-300 mb-1.5">ব্যানার হেডিং (Banner Text)</label>
+              <input type="text" id="adm-notice-banner" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-cyan-500">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-300 mb-1.5">বিস্তারিত নোটিশ মেসেজ</label>
+              <textarea id="adm-notice-details" rows="4" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:ring-1 focus:ring-cyan-500"></textarea>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-300 mb-1.5">হোয়াটসঅ্যাপ সাপোর্ট নম্বর</label>
+              <input type="tel" id="adm-notice-whatsapp" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-cyan-500">
+            </div>
+
+            <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 text-white font-bold text-sm shadow-md hover:opacity-95 transition">
+              নোটিশ আপডেট সংরক্ষণ করুন
+            </button>
+          </form>
+        </div>
+
+      </section>
+
+      <!-- ==================== TAB 6: SETTINGS & MODEMS ==================== -->
+      <section id="tab-content-settings" class="admin-tab-content hidden space-y-4">
+        
+        <div class="glass-card rounded-3xl p-6 border border-slate-800 max-w-2xl mx-auto space-y-4">
+          <div class="border-b border-slate-800 pb-3">
+            <h3 class="text-base font-bold text-white flex items-center gap-2">
+              <span>⚙️</span> সার্ভার ও টেলিকম গেটওয়ে সেটিংস
+            </h3>
+            <p class="text-xs text-slate-400">অটো-রিচার্জ লিমিট ও হেল্পলাইন পরিচালনা</p>
+          </div>
+
+          <form onsubmit="handleSaveSettings(event)" class="space-y-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-300 mb-1.5">সার্ভার প্ল্যাটফর্মের নাম</label>
+              <input type="text" id="adm-set-name" value="Lucceass TopUp Telecom Server" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-cyan-500">
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-1.5">সর্বনিম্ন রিচার্জ (টাকা)</label>
+                <input type="number" id="adm-set-minrec" value="20" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-1.5">সর্বোচ্চ রিচার্জ (টাকা)</label>
+                <input type="number" id="adm-set-maxrec" value="1000" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-1.5">হেল্পলাইন নম্বর</label>
+                <input type="tel" id="adm-set-help" value="01934109081" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-1.5">অটো-রিচার্জ মোড</label>
+                <select id="adm-set-mode" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none">
+                  <option value="auto" selected>অটোমেটিক (SIM Modem)</option>
+                  <option value="manual">ম্যানুয়াল অনুমোদন</option>
+                </select>
+              </div>
+            </div>
+
+            <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 text-white font-bold text-sm shadow-md hover:opacity-95 transition">
+              সার্ভার কনফিগারেশন সংরক্ষণ করুন
+            </button>
+          </form>
+        </div>
+
+      </section>
+
+      <!-- ==================== TAB 7: BUNDLES ==================== -->
+      <section id="tab-content-bundles" class="admin-tab-content hidden space-y-6">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div>
+            <h3 class="text-base font-bold text-white flex items-center gap-2">
+              <span>📦</span> ড্রাইভ ও ইন্টারনেট বান্ডেল অফার
+            </h3>
+            <p class="text-xs text-slate-400">সকল অপারেটরের ড্রাইভ ও রিচার্জ প্যাক এডিট ও নতুন অফার তৈরি করুন</p>
+          </div>
+          <button onclick="openBundleModal()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-bold text-xs shadow-lg transition">
+            ➕ নতুন বান্ডেল তৈরি
+          </button>
+        </div>
+
+        <!-- Filter by Operator -->
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+          <button onclick="filterAdminBundles('all')" class="adm-bundle-filter active px-3 py-1.5 rounded-xl bg-blue-600 text-white font-bold text-xs" data-op="all">সকল</button>
+          <button onclick="filterAdminBundles('GP')" class="adm-bundle-filter px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 font-bold text-xs" data-op="GP">GP</button>
+          <button onclick="filterAdminBundles('Robi')" class="adm-bundle-filter px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 font-bold text-xs" data-op="Robi">Robi</button>
+          <button onclick="filterAdminBundles('BL')" class="adm-bundle-filter px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 font-bold text-xs" data-op="BL">Banglalink</button>
+          <button onclick="filterAdminBundles('Airtel')" class="adm-bundle-filter px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 font-bold text-xs" data-op="Airtel">Airtel</button>
+          <button onclick="filterAdminBundles('TT')" class="adm-bundle-filter px-3 py-1.5 rounded-xl bg-slate-800 text-slate-300 font-bold text-xs" data-op="TT">Teletalk</button>
+        </div>
+
+        <div id="admin-bundles-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Bundles loaded dynamically -->
+        </div>
+      </section>
+
+      <!-- ==================== TAB 8: GAMES ==================== -->
+      <section id="tab-content-games" class="admin-tab-content hidden space-y-6">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div>
+            <h3 class="text-base font-bold text-white flex items-center gap-2">
+              <span>🎮</span> গেম টপ-আপ প্যাকেজ ম্যানেজমেন্ট
+            </h3>
+            <p class="text-xs text-slate-400">PUBG Mobile, Free Fire এবং Mobile Legends এর রেট ও প্যাকেজ পরিবর্তন</p>
+          </div>
+          <button onclick="openGamePackageModal()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-bold text-xs shadow-lg transition">
+            ➕ নতুন প্যাকেজ যোগ করুন
+          </button>
+        </div>
+
+        <div class="flex items-center gap-2 p-1 bg-slate-900/80 rounded-2xl border border-slate-800 w-fit">
+          <button onclick="switchAdminGameTab('PUBG')" id="adm-game-tab-PUBG" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-cyan-600 text-white transition">PUBG Mobile</button>
+          <button onclick="switchAdminGameTab('FF')" id="adm-game-tab-FF" class="px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition">Free Fire</button>
+          <button onclick="switchAdminGameTab('MLBB')" id="adm-game-tab-MLBB" class="px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition">Mobile Legends</button>
+        </div>
+
+        <div id="admin-games-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <!-- Packages loaded dynamically -->
+        </div>
+      </section>
+
+      <!-- ==================== TAB 9: SHOP ==================== -->
+      <section id="tab-content-shop" class="admin-tab-content hidden space-y-6">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div>
+            <h3 class="text-base font-bold text-white flex items-center gap-2">
+              <span>🛍️</span> ডিজিটাল শপ ও প্রোডাক্ট ম্যানেজমেন্ট
+            </h3>
+            <p class="text-xs text-slate-400">ই-কমার্স শপের প্রোডাক্ট, ক্যাটাগরি, মূল্য ও স্টক এডিট করুন</p>
+          </div>
+          <button onclick="openProductModal()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-bold text-xs shadow-lg transition">
+            ➕ নতুন প্রোডাক্ট তৈরি
+          </button>
+        </div>
+
+        <div id="admin-products-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <!-- Products loaded dynamically -->
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- ==================== MODALS ==================== -->
+
+  <!-- 1. ADJUST BALANCE MODAL -->
+  <div id="modal-adjust-balance" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="glass-card max-w-md w-full rounded-3xl p-6 border border-slate-700 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+        <div>
+          <h4 class="text-sm font-bold text-white flex items-center gap-2">
+            <span>💳</span> ব্যালেন্স লোড / কর্তন
+          </h4>
+          <p id="adj-user-label" class="text-xs text-cyan-400 mt-0.5">ইউজার: Foisal (01934109081)</p>
+        </div>
+        <button onclick="closeAdjustBalanceModal()" class="w-7 h-7 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center">✕</button>
+      </div>
+
+      <form onsubmit="submitAdjustBalance(event)" class="space-y-3.5">
+        <input type="hidden" id="adj-phone">
+        
+        <div>
+          <label class="block text-xs font-bold text-slate-300 mb-1">অ্যাকশন</label>
+          <div class="grid grid-cols-2 gap-2">
+            <label class="flex items-center gap-2 p-2.5 rounded-xl bg-slate-800 border border-slate-700 cursor-pointer">
+              <input type="radio" name="adj_action" value="add" checked class="text-emerald-500">
+              <span class="text-xs font-bold text-emerald-400">➕ ব্যালেন্স যোগ</span>
+            </label>
+            <label class="flex items-center gap-2 p-2.5 rounded-xl bg-slate-800 border border-slate-700 cursor-pointer">
+              <input type="radio" name="adj_action" value="deduct" class="text-rose-500">
+              <span class="text-xs font-bold text-rose-400">➖ ব্যালেন্স কর্তন</span>
+            </label>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-300 mb-1">ব্যালেন্স টাইপ</label>
+          <select id="adj-type" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white">
+            <option value="recharge">📱 রিচার্জ ব্যালেন্স</option>
+            <option value="drive">🏷️ ড্রাইভ ব্যালেন্স</option>
+            <option value="bank">🏦 ব্যাংক ব্যালেন্স</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-300 mb-1">টাকার পরিমাণ (টাকা)</label>
+          <input type="number" id="adj-amount" placeholder="যেমন: ৫০০" min="1" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none">
+        </div>
+
+        <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold text-xs shadow-md">
+          ব্যালেন্স নিশ্চিত করুন
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. BUNDLE MODAL -->
+  <div id="modal-bundle" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="glass-card max-w-md w-full rounded-3xl p-6 border border-slate-700 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+        <h4 id="bundle-modal-title" class="text-sm font-bold text-white flex items-center gap-2">
+          <span>📦</span> বান্ডেল প্যাকেজ তৈরি / সম্পাদনা
+        </h4>
+        <button onclick="closeBundleModal()" class="w-7 h-7 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center">✕</button>
+      </div>
+      <form onsubmit="handleSaveBundle(event)" class="space-y-3.5">
+        <input type="hidden" id="bundle-id">
+        <div>
+          <label class="block text-xs font-bold text-slate-300 mb-1">অপারেটর</label>
+          <select id="bundle-op" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white">
+            <option value="সকল অপারেটর">সকল অপারেটর</option>
+            <option value="GP">Grameenphone (GP)</option>
+            <option value="Robi">Robi</option>
+            <option value="BL">Banglalink</option>
+            <option value="Airtel">Airtel</option>
+            <option value="Teletalk">Teletalk</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-300 mb-1">বান্ডেল টাইটেল</label>
+          <input type="text" id="bundle-title" placeholder="যেমন: ৩৫ জিবি + ৫৫০ মিনিট" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1">মূল্য (টাকা)</label>
+            <input type="number" id="bundle-price" placeholder="যেমন: ৪১০" min="1" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1">মেয়াদ</label>
+            <input type="text" id="bundle-validity" placeholder="যেমন: ৩০ দিন" value="৩০ দিন" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none">
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-300 mb-1">ক্যাশব্যাক / অফার নোট</label>
+          <input type="text" id="bundle-cashback" placeholder="যেমন: ৳৩০ ক্যাশব্যাক" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none">
+        </div>
+        <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold text-xs shadow-md">
+          সংরক্ষণ করুন
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 3. GAME PACKAGE MODAL -->
+  <div id="modal-game-pkg" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="glass-card max-w-md w-full rounded-3xl p-6 border border-slate-700 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+        <h4 id="game-modal-title" class="text-sm font-bold text-white flex items-center gap-2">
+          <span>🎮</span> গেম প্যাকেজ তৈরি
+        </h4>
+        <button onclick="closeGamePackageModal()" class="w-7 h-7 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center">✕</button>
+      </div>
+      <form onsubmit="handleSaveGamePackage(event)" class="space-y-3.5">
+        <input type="hidden" id="game-pkg-id">
+        <div>
+          <label class="block text-xs font-bold text-slate-300 mb-1">গেম নির্বাচন</label>
+          <select id="game-key" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white">
+            <option value="PUBG">PUBG Mobile (UC)</option>
+            <option value="FF">Free Fire (Diamonds)</option>
+            <option value="MLBB">Mobile Legends (Diamonds)</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-300 mb-1">প্যাকেজ নাম / পরিমাণ</label>
+          <input type="text" id="game-pkg-label" placeholder="যেমন: 60 UC বা 115 Diamonds" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-300 mb-1">মূল্য (টাকা)</label>
+          <input type="number" id="game-pkg-price" placeholder="যেমন: ১১৫" min="1" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none">
+        </div>
+        <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold text-xs shadow-md">
+          প্যাকেজ সংরক্ষণ করুন
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 4. PRODUCT MODAL -->
+  <div id="modal-product" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="glass-card max-w-md w-full rounded-3xl p-6 border border-slate-700 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+        <h4 id="product-modal-title" class="text-sm font-bold text-white flex items-center gap-2">
+          <span>🛍️</span> শপ প্রোডাক্ট তৈরি / এডিট
+        </h4>
+        <button onclick="closeProductModal()" class="w-7 h-7 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center">✕</button>
+      </div>
+      <form onsubmit="handleSaveProduct(event)" class="space-y-3.5">
+        <input type="hidden" id="prod-id">
+        <div>
+          <label class="block text-xs font-bold text-slate-300 mb-1">প্রোডাক্ট নাম</label>
+          <input type="text" id="prod-name" placeholder="যেমন: Wireless Earbuds" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1">ক্যাটাগরি</label>
+            <input type="text" id="prod-cat" placeholder="Gadgets / Books / Clothing" value="Gadgets" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1">ইমোজি / আইকন</label>
+            <input type="text" id="prod-emoji" placeholder="🎧" value="📦" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none">
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1">মূল্য (টাকা)</label>
+            <input type="number" id="prod-price" placeholder="যেমন: ১২০০" min="1" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1">স্টক পরিমাণ</label>
+            <input type="number" id="prod-stock" placeholder="যেমন: ২৫" min="0" value="10" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none">
+          </div>
+        </div>
+        <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold text-xs shadow-md">
+          প্রোডাক্ট সংরক্ষণ করুন
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- FLOATING TOAST -->
+  <div id="adm-toast" class="fixed top-4 right-4 z-50 opacity-0 pointer-events-none transition-all duration-300 max-w-sm">
+    <div class="bg-slate-800 text-white border border-slate-700 px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-2.5">
+      <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+      <p id="adm-toast-msg" class="text-xs font-semibold">অপারেশন সফল হয়েছে</p>
+    </div>
+  </div>
+
+  <!-- Admin JavaScript Logic -->
+  <script>
+    const adminState = {
+      isLoggedIn: sessionStorage.getItem('lucceass_adm_logged') === 'true',
+      adminUser: JSON.parse(sessionStorage.getItem('lucceass_adm_info') || 'null'),
+      users: [],
+      transactions: [],
+      deposits: [],
+      stats: {},
+      currentTab: 'overview'
+    };
+
+    // REST API helper
+    async function admApi(endpoint, method = 'GET', body = null) {
+      try {
+        const options = { method, headers: { 'Content-Type': 'application/json' } };
+        if (body) options.body = JSON.stringify(body);
+        const res = await fetch(endpoint, options);
+        return await res.json();
+      } catch (e) {
+        console.error(e);
+        return { success: false, message: 'সার্ভার যোগাযোগে ব্যর্থতা!' };
+      }
+    }
+
+    function admToast(msg) {
+      const toast = document.getElementById('adm-toast');
+      const text = document.getElementById('adm-toast-msg');
+      if (!toast || !text) return;
+      text.innerText = msg;
+      toast.classList.remove('opacity-0', 'pointer-events-none', '-translate-y-2');
+      toast.classList.add('opacity-100', 'translate-y-0');
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'pointer-events-none', '-translate-y-2');
+        toast.classList.remove('opacity-100', 'translate-y-0');
+      }, 3000);
+    }
+
+    // Admin Login
+    async function handleAdminLogin(e) {
+      e.preventDefault();
+      const username = document.getElementById('adm-user').value.trim();
+      const password = document.getElementById('adm-pass').value.trim();
+
+      const btn = document.getElementById('btn-admin-login');
+      btn.innerText = 'যাচাই করা হচ্ছে...';
+      btn.disabled = true;
+
+      const res = await admApi('/api/admin/login', 'POST', { username, password });
+      btn.innerText = 'সার্ভারে প্রবেশ করুন';
+      btn.disabled = false;
+
+      if (res.success) {
+        adminState.isLoggedIn = true;
+        adminState.adminUser = res.admin;
+        sessionStorage.setItem('lucceass_adm_logged', 'true');
+        sessionStorage.setItem('lucceass_adm_info', JSON.stringify(res.admin));
+        
+        admToast('সফলভাবে অ্যাডমিন প্যানেলে লগইন হয়েছে!');
+        showAdminWorkspace();
+      } else {
+        admToast(res.message || 'ভুল ইউজারনেম বা পাসওয়ার্ড!');
+      }
+    }
+
+    function handleAdminLogout() {
+      adminState.isLoggedIn = false;
+      sessionStorage.removeItem('lucceass_adm_logged');
+      sessionStorage.removeItem('lucceass_adm_info');
+      document.getElementById('admin-workspace-view').classList.add('hidden');
+      document.getElementById('admin-login-view').classList.remove('hidden');
+      admToast('অ্যাডমিন লগআউট সম্পন্ন হয়েছে');
+    }
+
+    function showAdminWorkspace() {
+      document.getElementById('admin-login-view').classList.add('hidden');
+      document.getElementById('admin-workspace-view').classList.remove('hidden');
+      if (adminState.adminUser?.name) {
+        document.getElementById('admin-name-badge').innerText = adminState.adminUser.name;
+      }
+      refreshAdminData();
+    }
+
+    function switchAdminTab(tabName) {
+      adminState.currentTab = tabName;
+      document.querySelectorAll('.admin-tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+        btn.classList.remove('bg-blue-600', 'text-white');
+        btn.classList.add('bg-slate-800/80', 'text-slate-300');
+      });
+
+      const target = document.getElementById(`tab-content-${tabName}`);
+      const btn = document.getElementById(`tab-btn-${tabName}`);
+      if (target) target.classList.remove('hidden');
+      if (btn) {
+        btn.classList.add('bg-blue-600', 'text-white');
+        btn.classList.remove('bg-slate-800/80', 'text-slate-300');
+      }
+
+      if (tabName === 'users') fetchAdminUsers();
+      if (tabName === 'recharges') fetchAdminTransactions();
+      if (tabName === 'deposits') fetchAdminDeposits();
+      if (tabName === 'notice') fetchAdminNotice();
+      if (tabName === 'settings') fetchAdminSettings();
+      if (tabName === 'bundles') fetchAdminBundles();
+      if (tabName === 'games') fetchAdminGames();
+      if (tabName === 'shop') fetchAdminProducts();
+    }
+
+    // Refresh Overview Stats
+    async function refreshAdminData() {
+      const statsRes = await admApi('/api/admin/stats');
+      if (statsRes.success && statsRes.stats) {
+        const s = statsRes.stats;
+        document.getElementById('stat-total-users').innerText = s.totalUsers;
+        document.getElementById('badge-users-count').innerText = s.totalUsers;
+        document.getElementById('stat-total-balance').innerText = `৳${s.totalUserBalance.toFixed(2)}`;
+        document.getElementById('stat-today-recharge').innerText = `৳${s.todayRechargeTotal.toFixed(2)}`;
+        document.getElementById('stat-today-count').innerText = `${s.todayRechargeCount} টি সফল লেনদেন`;
+        document.getElementById('stat-pending-deposits').innerText = s.pendingDeposits;
+        document.getElementById('badge-pending-deposits').innerText = s.pendingDeposits;
+      }
+
+      // Fetch overview modems
+      const setRes = await admApi('/api/admin/settings');
+      if (setRes.success && setRes.settings?.modems) {
+        renderModems(setRes.settings.modems);
+      }
+
+      fetchAdminUsers(true);
+      fetchAdminTransactions(true);
+    }
+
+    function renderModems(modems) {
+      const container = document.getElementById('modem-slots-container');
+      if (!container) return;
+      container.innerHTML = modems.map(m => `
+        <div class="p-3.5 rounded-2xl bg-slate-800/80 border border-slate-700/80 space-y-1.5">
+          <div class="flex items-center justify-between text-xs">
+            <span class="font-bold text-white">Slot ${m.slot}: ${m.operator}</span>
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          </div>
+          <p class="text-[11px] text-slate-400 font-mono">${m.simNumber}</p>
+          <div class="flex items-center justify-between pt-1 border-t border-slate-700/60 text-[10px]">
+            <span class="text-cyan-400 font-semibold">সিগন্যাল: ${m.signal}</span>
+            <span class="text-emerald-400 font-bold">৳${m.balance}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Fetch and Render Users Table
+    async function fetchAdminUsers(overviewOnly = false) {
+      const res = await admApi('/api/admin/users');
+      if (res.success && res.users) {
+        adminState.users = res.users;
+        
+        // Render overview users
+        const recContainer = document.getElementById('overview-recent-users');
+        if (recContainer) {
+          if (res.users.length === 0) {
+            recContainer.innerHTML = '<p class="text-xs text-slate-500 py-3 text-center">এখনও কোনো ইউজার অ্যাকাউন্ট তৈরি করেননি</p>';
+          } else {
+            recContainer.innerHTML = res.users.slice(0, 4).map(u => `
+              <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-800/60 border border-slate-800">
+                <div>
+                  <h5 class="text-xs font-bold text-white">${u.name}</h5>
+                  <p class="text-[10px] text-slate-400">${u.phone} • <span class="text-cyan-400 font-semibold">${u.role}</span></p>
+                </div>
+                <span class="text-xs font-bold text-emerald-400">৳${(u.rechargeBalance || 0).toFixed(2)}</span>
+              </div>
+            `).join('');
+          }
+        }
+
+        if (overviewOnly) return;
+
+        // Render full users table
+        const tbody = document.getElementById('users-table-body');
+        if (!tbody) return;
+
+        if (res.users.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="7" class="px-4 py-8 text-center text-slate-500">কোনো ইউজার পাওয়া যায়নি। গ্রাহকরা সাইট থেকে রেজিস্ট্রেশন করলে এখানে দেখা যাবে।</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = res.users.map(u => `
+          <tr class="table-row">
+            <td class="px-4 py-3 font-bold text-white flex items-center gap-2">
+              <span class="w-7 h-7 rounded-full bg-blue-900 text-cyan-300 flex items-center justify-center text-xs font-bold">👤</span>
+              <span>${u.name}</span>
+            </td>
+            <td class="px-4 py-3 font-mono text-cyan-400 font-semibold">${u.phone}</td>
+            <td class="px-4 py-3">
+              <select onchange="updateUserRole('${u.phone}', this.value)" class="bg-slate-800 border border-slate-700 rounded-lg px-2 py-1 text-[11px] text-amber-300 font-semibold">
+                <option value="Retailer" ${u.role === 'Retailer' ? 'selected' : ''}>Retailer</option>
+                <option value="Dealer" ${u.role === 'Dealer' ? 'selected' : ''}>Dealer</option>
+                <option value="DGM" ${u.role === 'DGM' ? 'selected' : ''}>DGM</option>
+                <option value="Sub-Admin" ${u.role === 'Sub-Admin' ? 'selected' : ''}>Sub-Admin</option>
+              </select>
+            </td>
+            <td class="px-4 py-3 font-bold text-emerald-400">৳${(u.rechargeBalance || 0).toFixed(2)}</td>
+            <td class="px-4 py-3 font-bold text-cyan-400">৳${(u.driveBalance || 0).toFixed(2)}</td>
+            <td class="px-4 py-3">
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${u.status === 'blocked' ? 'bg-rose-950 text-rose-400 border border-rose-800' : 'bg-emerald-950 text-emerald-400 border border-emerald-800'}">
+                ${u.status === 'blocked' ? 'ব্লকড' : 'সক্রিয়'}
+              </span>
+            </td>
+            <td class="px-4 py-3 text-right space-x-1">
+              <button onclick="openAdjustBalanceModal('${u.phone}', '${u.name}')" class="px-2.5 py-1 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-[11px] transition" title="ব্যালেন্স পরিবর্তন">
+                ± ব্যালেন্স
+              </button>
+              <button onclick="toggleUserStatus('${u.phone}', '${u.status === 'blocked' ? 'active' : 'blocked'}')" class="px-2 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-[11px] transition">
+                ${u.status === 'blocked' ? 'আনব্লক' : 'ব্লক'}
+              </button>
+              <button onclick="deleteUser('${u.phone}')" class="px-2 py-1 rounded-lg bg-rose-950 hover:bg-rose-900 text-rose-400 font-bold text-[11px] transition" title="ডিলিট">
+                🗑️
+              </button>
+            </td>
+          </tr>
+        `).join('');
+      }
+    }
+
+    // Balance Adjust Modal
+    function openAdjustBalanceModal(phone, name) {
+      document.getElementById('adj-phone').value = phone;
+      document.getElementById('adj-user-label').innerText = `ইউজার: ${name} (${phone})`;
+      document.getElementById('adj-amount').value = '';
+      document.getElementById('modal-adjust-balance').classList.remove('hidden');
+    }
+
+    function closeAdjustBalanceModal() {
+      document.getElementById('modal-adjust-balance').classList.add('hidden');
+    }
+
+    async function submitAdjustBalance(e) {
+      e.preventDefault();
+      const phone = document.getElementById('adj-phone').value;
+      const type = document.getElementById('adj-type').value;
+      const action = document.querySelector('input[name="adj_action"]:checked')?.value || 'add';
+      const amount = document.getElementById('adj-amount').value;
+
+      const res = await admApi('/api/admin/user/balance', 'POST', { phone, type, action, amount });
+      if (res.success) {
+        closeAdjustBalanceModal();
+        admToast(res.message);
+        fetchAdminUsers();
+        refreshAdminData();
+      } else {
+        admToast(res.message || 'ব্যালেন্স আপডেট ব্যর্থ হয়েছে');
+      }
+    }
+
+    async function updateUserRole(phone, role) {
+      const res = await admApi('/api/admin/user/role', 'POST', { phone, role });
+      if (res.success) admToast(res.message);
+    }
+
+    async function toggleUserStatus(phone, status) {
+      const res = await admApi('/api/admin/user/status', 'POST', { phone, status });
+      if (res.success) {
+        admToast(res.message);
+        fetchAdminUsers();
+      }
+    }
+
+    async function deleteUser(phone) {
+      if (!confirm(`আপনি কি নিশ্চিত যে ${phone} নম্বর ইউজারকে মুছে ফেলতে চান?`)) return;
+      const res = await admApi('/api/admin/user/delete', 'POST', { phone });
+      if (res.success) {
+        admToast(res.message);
+        fetchAdminUsers();
+        refreshAdminData();
+      }
+    }
+
+    // Transactions Table
+    async function fetchAdminTransactions(overviewOnly = false) {
+      const res = await admApi('/api/admin/transactions');
+      if (res.success && res.transactions) {
+        adminState.transactions = res.transactions;
+
+        // Render overview transactions
+        const txContainer = document.getElementById('overview-recent-tx');
+        if (txContainer) {
+          if (res.transactions.length === 0) {
+            txContainer.innerHTML = '<p class="text-xs text-slate-500 py-3 text-center">এখনও কোনো লেনদেন সম্পন্ন হয়নি</p>';
+          } else {
+            txContainer.innerHTML = res.transactions.slice(0, 4).map(t => `
+              <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-800/60 border border-slate-800">
+                <div>
+                  <h5 class="text-xs font-bold text-white">${t.number}</h5>
+                  <p class="text-[10px] text-slate-400">${t.operator} • <span class="text-cyan-400 font-semibold">${t.type}</span></p>
+                </div>
+                <div class="text-right">
+                  <span class="text-xs font-bold text-white">৳${t.amount}</span>
+                  <span class="block text-[10px] font-semibold ${t.status === 'সফল' ? 'text-emerald-400' : 'text-amber-400'}">${t.status}</span>
+                </div>
+              </div>
+            `).join('');
+          }
+        }
+
+        if (overviewOnly) return;
+
+        const tbody = document.getElementById('transactions-table-body');
+        if (!tbody) return;
+
+        if (res.transactions.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="8" class="px-4 py-8 text-center text-slate-500">কোনো লেনদেন রেকর্ড পাওয়া যায়নি।</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = res.transactions.map(t => `
+          <tr class="table-row">
+            <td class="px-4 py-3 font-mono font-bold text-slate-300">${t.id}</td>
+            <td class="px-4 py-3 text-slate-300">${t.userName || t.userPhone || '-'}</td>
+            <td class="px-4 py-3 font-mono font-bold text-white">${t.number}</td>
+            <td class="px-4 py-3 font-semibold text-cyan-400">${t.operator} (${t.type})</td>
+            <td class="px-4 py-3 font-black text-emerald-400">৳${t.amount}</td>
+            <td class="px-4 py-3 text-[11px] text-slate-400">${t.date || 'এইমাত্র'}</td>
+            <td class="px-4 py-3">
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${t.status === 'সফল' ? 'bg-emerald-950 text-emerald-400 border border-emerald-800' : t.status === 'পেন্ডিং' ? 'bg-amber-950 text-amber-400 border border-amber-800' : 'bg-rose-950 text-rose-400 border border-rose-800'}">
+                ${t.status}
+              </span>
+            </td>
+            <td class="px-4 py-3 text-right space-x-1">
+              <button onclick="updateTxStatus('${t.id}', 'সফল')" class="px-2 py-1 rounded bg-emerald-900 hover:bg-emerald-800 text-emerald-200 text-[10px] font-bold">সফল</button>
+              <button onclick="updateTxStatus('${t.id}', 'বাতিল')" class="px-2 py-1 rounded bg-rose-950 hover:bg-rose-900 text-rose-300 text-[10px] font-bold">বাতিল</button>
+            </td>
+          </tr>
+        `).join('');
+      }
+    }
+
+    async function updateTxStatus(id, status) {
+      const res = await admApi('/api/admin/transaction/status', 'POST', { id, status });
+      if (res.success) {
+        admToast(res.message);
+        fetchAdminTransactions();
+        refreshAdminData();
+      }
+    }
+
+    // Deposits Table
+    async function fetchAdminDeposits() {
+      const res = await admApi('/api/admin/deposits');
+      if (res.success && res.deposits) {
+        adminState.deposits = res.deposits;
+        const tbody = document.getElementById('deposits-table-body');
+        if (!tbody) return;
+
+        if (res.deposits.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="8" class="px-4 py-8 text-center text-slate-500">কোনো অ্যাড মানি বা ডিপোজিট রিকোয়েস্ট নেই।</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = res.deposits.map(d => `
+          <tr class="table-row">
+            <td class="px-4 py-3 font-mono font-bold text-slate-400">${d.id}</td>
+            <td class="px-4 py-3 text-white font-bold">${d.userName} (${d.userPhone})</td>
+            <td class="px-4 py-3 font-semibold text-cyan-400">${d.method}</td>
+            <td class="px-4 py-3 font-black text-emerald-400">৳${d.amount}</td>
+            <td class="px-4 py-3 font-mono font-bold text-amber-300">${d.trxId}</td>
+            <td class="px-4 py-3 text-slate-300">${d.targetBalance}</td>
+            <td class="px-4 py-3">
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${d.status === 'অনুমোদিত' ? 'bg-emerald-950 text-emerald-400 border border-emerald-800' : d.status === 'পেন্ডিং' ? 'bg-amber-950 text-amber-400 border border-amber-800' : 'bg-rose-950 text-rose-400 border border-rose-800'}">
+                ${d.status}
+              </span>
+            </td>
+            <td class="px-4 py-3 text-right space-x-1">
+              ${d.status === 'পেন্ডিং' ? `
+                <button onclick="handleDepositAction('${d.id}', 'approve')" class="px-2.5 py-1 rounded bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[11px] transition">অনুমোদন</button>
+                <button onclick="handleDepositAction('${d.id}', 'reject')" class="px-2 py-1 rounded bg-rose-900 hover:bg-rose-800 text-rose-200 font-bold text-[11px] transition">বাতিল</button>
+              ` : `<span class="text-[10px] text-slate-500 font-semibold">নিষ্পন্ন</span>`}
+            </td>
+          </tr>
+        `).join('');
+      }
+    }
+
+    async function handleDepositAction(id, action) {
+      const res = await admApi('/api/admin/deposit/action', 'POST', { id, action });
+      if (res.success) {
+        admToast(res.message);
+        fetchAdminDeposits();
+        refreshAdminData();
+      } else {
+        admToast(res.message);
+      }
+    }
+
+    // Notice Controller
+    async function fetchAdminNotice() {
+      const res = await admApi('/api/notice');
+      if (res.success && res.notice) {
+        const n = res.notice;
+        document.getElementById('adm-notice-title').value = n.title || '';
+        document.getElementById('adm-notice-banner').value = n.bannerTitle || '';
+        document.getElementById('adm-notice-details').value = n.details || '';
+        document.getElementById('adm-notice-whatsapp').value = n.whatsapp || '';
+      }
+    }
+
+    async function handleSaveNotice(e) {
+      e.preventDefault();
+      const title = document.getElementById('adm-notice-title').value;
+      const bannerTitle = document.getElementById('adm-notice-banner').value;
+      const details = document.getElementById('adm-notice-details').value;
+      const whatsapp = document.getElementById('adm-notice-whatsapp').value;
+
+      const res = await admApi('/api/admin/notice', 'POST', { title, bannerTitle, details, whatsapp });
+      if (res.success) admToast(res.message);
+    }
+
+    // Settings Controller
+    async function fetchAdminSettings() {
+      const res = await admApi('/api/admin/settings');
+      if (res.success && res.settings) {
+        const s = res.settings;
+        document.getElementById('adm-set-name').value = s.serverName || '';
+        document.getElementById('adm-set-minrec').value = s.minRecharge || 20;
+        document.getElementById('adm-set-maxrec').value = s.maxRecharge || 1000;
+        document.getElementById('adm-set-help').value = s.helpline || '';
+        document.getElementById('adm-set-mode').value = s.rechargeMode || 'auto';
+      }
+    }
+
+    async function handleSaveSettings(e) {
+      e.preventDefault();
+      const serverName = document.getElementById('adm-set-name').value;
+      const minRecharge = parseFloat(document.getElementById('adm-set-minrec').value);
+      const maxRecharge = parseFloat(document.getElementById('adm-set-maxrec').value);
+      const helpline = document.getElementById('adm-set-help').value;
+      const rechargeMode = document.getElementById('adm-set-mode').value;
+
+      const res = await admApi('/api/admin/settings', 'POST', { serverName, minRecharge, maxRecharge, helpline, rechargeMode });
+      if (res.success) admToast(res.message);
+    }
+
+    // ==================== BUNDLES MANAGEMENT ====================
+    let adminBundles = [];
+    let currentBundleFilter = 'all';
+
+    async function fetchAdminBundles() {
+      const res = await admApi('/api/admin/bundles');
+      if (res.success && res.bundles) {
+        adminBundles = res.bundles;
+        renderAdminBundles();
+      }
+    }
+
+    function filterAdminBundles(op) {
+      currentBundleFilter = op;
+      document.querySelectorAll('.adm-bundle-filter').forEach(btn => {
+        if (btn.getAttribute('data-op') === op) {
+          btn.classList.add('bg-blue-600', 'text-white');
+          btn.classList.remove('bg-slate-800', 'text-slate-300');
+        } else {
+          btn.classList.remove('bg-blue-600', 'text-white');
+          btn.classList.add('bg-slate-800', 'text-slate-300');
+        }
+      });
+      renderAdminBundles();
+    }
+
+    function renderAdminBundles() {
+      const container = document.getElementById('admin-bundles-container');
+      if (!container) return;
+      const filtered = currentBundleFilter === 'all' 
+        ? adminBundles 
+        : adminBundles.filter(b => (b.op || '').toLowerCase().includes(currentBundleFilter.toLowerCase()));
+
+      if (filtered.length === 0) {
+        container.innerHTML = '<p class="col-span-full text-center text-slate-500 py-8 text-xs font-semibold">কোনো বান্ডেল প্যাকেজ পাওয়া যায়নি।</p>';
+        return;
+      }
+
+      container.innerHTML = filtered.map(b => `
+        <div class="glass-card rounded-2xl p-4 border border-slate-800 space-y-3 relative group">
+          <div class="flex items-center justify-between">
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-cyan-950 text-cyan-300 border border-cyan-800">${b.op || 'All'}</span>
+            <span class="text-base font-black text-emerald-400">৳${b.price}</span>
+          </div>
+          <h4 class="text-xs font-bold text-white line-clamp-2">${b.title}</h4>
+          <div class="flex items-center justify-between text-[11px] text-slate-400">
+            <span class="text-amber-300 font-semibold">${b.cashback || 'ক্যাশব্যাক নেই'}</span>
+            <span>⏱️ ${b.validity || '৩০ দিন'}</span>
+          </div>
+          <div class="pt-2 border-t border-slate-800 flex items-center justify-end gap-2">
+            <button onclick="editAdminBundle('${b.id}')" class="px-3 py-1 rounded-lg bg-blue-900/60 hover:bg-blue-800 text-blue-200 text-[11px] font-bold transition">সম্পাদনা</button>
+            <button onclick="deleteAdminBundle('${b.id}')" class="px-3 py-1 rounded-lg bg-rose-950 hover:bg-rose-900 text-rose-300 text-[11px] font-bold transition">মুছুন</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openBundleModal(bundle = null) {
+      document.getElementById('bundle-id').value = bundle ? bundle.id : '';
+      document.getElementById('bundle-op').value = bundle ? (bundle.op || 'সকল অপারেটর') : 'সকল অপারেটর';
+      document.getElementById('bundle-title').value = bundle ? bundle.title : '';
+      document.getElementById('bundle-price').value = bundle ? bundle.price : '';
+      document.getElementById('bundle-validity').value = bundle ? bundle.validity : '৩০ দিন';
+      document.getElementById('bundle-cashback').value = bundle ? (bundle.cashback || '') : '';
+      document.getElementById('bundle-modal-title').innerHTML = bundle ? '<span>📦</span> বান্ডেল সম্পাদনা' : '<span>📦</span> নতুন বান্ডেল তৈরি';
+      document.getElementById('modal-bundle').classList.remove('hidden');
+    }
+
+    function closeBundleModal() {
+      document.getElementById('modal-bundle').classList.add('hidden');
+    }
+
+    function editAdminBundle(id) {
+      const b = adminBundles.find(item => item.id === id);
+      if (b) openBundleModal(b);
+    }
+
+    async function handleSaveBundle(e) {
+      e.preventDefault();
+      const id = document.getElementById('bundle-id').value;
+      const op = document.getElementById('bundle-op').value;
+      const title = document.getElementById('bundle-title').value;
+      const price = parseFloat(document.getElementById('bundle-price').value);
+      const validity = document.getElementById('bundle-validity').value;
+      const cashback = document.getElementById('bundle-cashback').value;
+
+      const res = await admApi('/api/admin/bundle/save', 'POST', { id, op, title, price, validity, cashback });
+      if (res.success) {
+        closeBundleModal();
+        admToast(res.message);
+        fetchAdminBundles();
+      } else {
+        admToast(res.message || 'সংরক্ষণ ব্যর্থ হয়েছে');
+      }
+    }
+
+    async function deleteAdminBundle(id) {
+      if (!confirm('আপনি কি নিশ্চিত যে এই বান্ডেলটি মুছে ফেলতে চান?')) return;
+      const res = await admApi('/api/admin/bundle/delete', 'POST', { id });
+      if (res.success) {
+        admToast(res.message);
+        fetchAdminBundles();
+      }
+    }
+
+    // ==================== GAMES MANAGEMENT ====================
+    let adminGames = {};
+    let selectedAdminGame = 'PUBG';
+
+    async function fetchAdminGames() {
+      const res = await admApi('/api/admin/games');
+      if (res.success && res.games) {
+        adminGames = res.games;
+        renderAdminGames();
+      }
+    }
+
+    function switchAdminGameTab(gameKey) {
+      selectedAdminGame = gameKey;
+      ['PUBG', 'FF', 'MLBB'].forEach(k => {
+        const btn = document.getElementById(`adm-game-tab-${k}`);
+        if (btn) {
+          if (k === gameKey) {
+            btn.classList.add('bg-cyan-600', 'text-white');
+            btn.classList.remove('text-slate-400');
+          } else {
+            btn.classList.remove('bg-cyan-600', 'text-white');
+            btn.classList.add('text-slate-400');
+          }
+        }
+      });
+      renderAdminGames();
+    }
+
+    function renderAdminGames() {
+      const container = document.getElementById('admin-games-container');
+      if (!container) return;
+      const game = adminGames[selectedAdminGame];
+      if (!game || !game.packages || game.packages.length === 0) {
+        container.innerHTML = '<p class="col-span-full text-center text-slate-500 py-8 text-xs font-semibold">কোনো প্যাকেজ পাওয়া যায়নি।</p>';
+        return;
+      }
+
+      container.innerHTML = game.packages.map(p => `
+        <div class="glass-card rounded-2xl p-4 border border-slate-800 space-y-3 relative">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] font-bold text-cyan-400 font-mono">${game.currency}</span>
+            <span class="text-sm font-black text-emerald-400">৳${p.price}</span>
+          </div>
+          <h4 class="text-xs font-bold text-white">${p.label || p.name || ''}</h4>
+          <div class="pt-2 border-t border-slate-800 flex items-center justify-end">
+            <button onclick="deleteAdminGamePackage('${selectedAdminGame}', '${p.id}')" class="px-2.5 py-1 rounded-lg bg-rose-950 hover:bg-rose-900 text-rose-300 text-[11px] font-bold transition">মুছুন</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openGamePackageModal() {
+      document.getElementById('game-key').value = selectedAdminGame;
+      document.getElementById('game-pkg-label').value = '';
+      document.getElementById('game-pkg-price').value = '';
+      document.getElementById('modal-game-pkg').classList.remove('hidden');
+    }
+
+    function closeGamePackageModal() {
+      document.getElementById('modal-game-pkg').classList.add('hidden');
+    }
+
+    async function handleSaveGamePackage(e) {
+      e.preventDefault();
+      const game = document.getElementById('game-key').value;
+      const label = document.getElementById('game-pkg-label').value;
+      const price = parseFloat(document.getElementById('game-pkg-price').value);
+
+      const res = await admApi('/api/admin/game-package/save', 'POST', { game, label, price });
+      if (res.success) {
+        closeGamePackageModal();
+        admToast(res.message);
+        fetchAdminGames();
+      } else {
+        admToast(res.message || 'সংরক্ষণ ব্যর্থ হয়েছে');
+      }
+    }
+
+    async function deleteAdminGamePackage(game, id) {
+      if (!confirm('আপনি কি এই প্যাকেজটি মুছে ফেলতে চান?')) return;
+      const res = await admApi('/api/admin/game-package/delete', 'POST', { game, id });
+      if (res.success) {
+        admToast(res.message);
+        fetchAdminGames();
+      }
+    }
+
+    // ==================== SHOP MANAGEMENT ====================
+    let adminProducts = [];
+
+    async function fetchAdminProducts() {
+      const res = await admApi('/api/admin/products');
+      if (res.success && res.products) {
+        adminProducts = res.products;
+        renderAdminProducts();
+      }
+    }
+
+    function renderAdminProducts() {
+      const container = document.getElementById('admin-products-container');
+      if (!container) return;
+      if (adminProducts.length === 0) {
+        container.innerHTML = '<p class="col-span-full text-center text-slate-500 py-8 text-xs font-semibold">কোনো প্রোডাক্ট পাওয়া যায়নি।</p>';
+        return;
+      }
+
+      container.innerHTML = adminProducts.map(p => `
+        <div class="glass-card rounded-2xl p-4 border border-slate-800 space-y-3 relative group">
+          <div class="flex items-center justify-between">
+            <span class="text-2xl">${p.emoji || '📦'}</span>
+            <span class="text-sm font-black text-emerald-400">৳${p.price}</span>
+          </div>
+          <div>
+            <span class="text-[10px] font-bold text-cyan-400 uppercase tracking-wider">${p.category}</span>
+            <h4 class="text-xs font-bold text-white line-clamp-1">${p.name}</h4>
+          </div>
+          <div class="flex items-center justify-between text-[11px] text-slate-400">
+            <span>স্টক: <strong class="text-white">${p.stock}</strong></span>
+          </div>
+          <div class="pt-2 border-t border-slate-800 flex items-center justify-end gap-2">
+            <button onclick="editAdminProduct('${p.id}')" class="px-2.5 py-1 rounded-lg bg-blue-900/60 hover:bg-blue-800 text-blue-200 text-[11px] font-bold transition">এডিট</button>
+            <button onclick="deleteAdminProduct('${p.id}')" class="px-2.5 py-1 rounded-lg bg-rose-950 hover:bg-rose-900 text-rose-300 text-[11px] font-bold transition">মুছুন</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openProductModal(prod = null) {
+      document.getElementById('prod-id').value = prod ? prod.id : '';
+      document.getElementById('prod-name').value = prod ? prod.name : '';
+      document.getElementById('prod-cat').value = prod ? prod.category : 'Gadgets';
+      document.getElementById('prod-emoji').value = prod ? prod.emoji : '📦';
+      document.getElementById('prod-price').value = prod ? prod.price : '';
+      document.getElementById('prod-stock').value = prod ? prod.stock : '10';
+      document.getElementById('product-modal-title').innerHTML = prod ? '<span>🛍️</span> প্রোডাক্ট সম্পাদনা' : '<span>🛍️</span> নতুন প্রোডাক্ট তৈরি';
+      document.getElementById('modal-product').classList.remove('hidden');
+    }
+
+    function closeProductModal() {
+      document.getElementById('modal-product').classList.add('hidden');
+    }
+
+    function editAdminProduct(id) {
+      const p = adminProducts.find(item => item.id === id);
+      if (p) openProductModal(p);
+    }
+
+    async function handleSaveProduct(e) {
+      e.preventDefault();
+      const id = document.getElementById('prod-id').value;
+      const name = document.getElementById('prod-name').value;
+      const category = document.getElementById('prod-cat').value;
+      const emoji = document.getElementById('prod-emoji').value;
+      const price = parseFloat(document.getElementById('prod-price').value);
+      const stock = parseInt(document.getElementById('prod-stock').value);
+
+      const res = await admApi('/api/admin/product/save', 'POST', { id, name, category, emoji, price, stock });
+      if (res.success) {
+        closeProductModal();
+        admToast(res.message);
+        fetchAdminProducts();
+      } else {
+        admToast(res.message || 'সংরক্ষণ ব্যর্থ হয়েছে');
+      }
+    }
+
+    async function deleteAdminProduct(id) {
+      if (!confirm('আপনি কি নিশ্চিত যে এই প্রোডাক্টটি মুছে ফেলতে চান?')) return;
+      const res = await admApi('/api/admin/product/delete', 'POST', { id });
+      if (res.success) {
+        admToast(res.message);
+        fetchAdminProducts();
+      }
+    }
+
+    // Startup check
+    document.addEventListener('DOMContentLoaded', () => {
+      if (adminState.isLoggedIn) {
+        showAdminWorkspace();
+      }
+    });
+  </script>
+</body>
+</html>

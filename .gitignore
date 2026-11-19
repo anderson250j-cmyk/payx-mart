@@ -1,0 +1,5 @@
+*.bak*
+drawer_capture_*.jpg
+node_modules/
+.system_generated/
+.DS_Store

@@ -1,0 +1,535 @@
+{
+  "settings": {
+    "siteName": "PayX Pro",
+    "tagline": "One Platform. Endless Possibilities.",
+    "marqueeText": "⚡ লাইভ টেস্ট নোটিশ: সকল পয়েন্ট ১০০% এডিটেবল এবং ব্যাকএন্ড সেভ সক্রিয়!",
+    "whatsapp": "8801934109081",
+    "minRecharge": 10,
+    "maxRecharge": 5000,
+    "minDeposit": 50,
+    "vipPrice": 161,
+    "coinRechargeThreshold": 312,
+    "shareCoinMilestone": 10,
+    "lifetimeRedeemThreshold": 1000,
+    "coinValueBdt": 1,
+    "adminPin": "AR2026"
+  },
+  "operators": [
+    {
+      "id": "GP",
+      "name": "GP",
+      "color": "#0095DA",
+      "prefixes": [
+        "017",
+        "013"
+      ],
+      "active": true
+    },
+    {
+      "id": "Robi",
+      "name": "Robi",
+      "color": "#E2136E",
+      "prefixes": [
+        "018"
+      ],
+      "active": true
+    },
+    {
+      "id": "Airtel",
+      "name": "Airtel",
+      "color": "#FF0000",
+      "prefixes": [
+        "016"
+      ],
+      "active": true
+    },
+    {
+      "id": "BL",
+      "name": "Banglalink",
+      "color": "#F37021",
+      "prefixes": [
+        "019",
+        "014"
+      ],
+      "active": true
+    },
+    {
+      "id": "TT",
+      "name": "Teletalk",
+      "color": "#4CAF50",
+      "prefixes": [
+        "015"
+      ],
+      "active": true
+    },
+    {
+      "id": "Brilliant",
+      "name": "Brilliant",
+      "color": "#FFC419",
+      "prefixes": [
+        "096"
+      ],
+      "active": true
+    },
+    {
+      "id": "Alap",
+      "name": "Alap",
+      "color": "#3B82F6",
+      "prefixes": [
+        "0969"
+      ],
+      "active": true
+    }
+  ],
+  "bundles": [
+    {
+      "id": "b1",
+      "title": "৩৫ জিবি ইন্টারনেট + ৫৫০ মিনিট (৩০ দিন)",
+      "op": "সকল অপারেটর",
+      "price": 410,
+      "cashback": "৳৩০ ক্যাশব্যাক",
+      "validity": "৩০ দিন"
+    },
+    {
+      "id": "b2",
+      "title": "১৫ জিবি হাই-স্পিড ডাটা প্যাক (৩০ দিন)",
+      "op": "GP / Robi / BL",
+      "price": 249,
+      "cashback": "৳১৫ ক্যাশব্যাক",
+      "validity": "৩০ দিন"
+    },
+    {
+      "id": "b3",
+      "title": "৩২০ মিনিট টকটাইম বান্ডেল (৩০ দিন)",
+      "op": "সকল অপারেটর",
+      "price": 198,
+      "cashback": "ইনস্ট্যান্ট অ্যাক্টিভেশন",
+      "validity": "৩০ দিন"
+    },
+    {
+      "id": "b4",
+      "title": "৫০ জিবি মেগা ইন্টারনেট প্যাক (৩০ দিন)",
+      "op": "সকল অপারেটর",
+      "price": 498,
+      "cashback": "৳৩০ ক্যাশব্যাক + ২ কয়েন",
+      "validity": "৩০ দিন"
+    }
+  ],
+  "games": {
+    "PUBG": {
+      "name": "PUBG Mobile",
+      "currency": "UC",
+      "packages": [
+        {
+          "id": "pubg_60",
+          "label": "60 UC (Special)",
+          "price": 115
+        },
+        {
+          "id": "pubg_325",
+          "label": "325 UC",
+          "price": 550
+        },
+        {
+          "id": "pubg_660",
+          "label": "660 UC",
+          "price": 1080
+        },
+        {
+          "id": "pubg_1800",
+          "label": "1800 UC",
+          "price": 2750
+        }
+      ]
+    },
+    "FF": {
+      "name": "Free Fire",
+      "currency": "Diamonds",
+      "packages": [
+        {
+          "id": "ff_115",
+          "label": "115 Diamonds",
+          "price": 95
+        },
+        {
+          "id": "ff_240",
+          "label": "240 Diamonds",
+          "price": 190
+        },
+        {
+          "id": "ff_610",
+          "label": "610 Diamonds",
+          "price": 460
+        },
+        {
+          "id": "ff_weekly",
+          "label": "Weekly Membership",
+          "price": 165
+        }
+      ]
+    },
+    "MLBB": {
+      "name": "Mobile Legends",
+      "currency": "Diamonds",
+      "packages": [
+        {
+          "id": "mlbb_86",
+          "label": "86 Diamonds",
+          "price": 145
+        },
+        {
+          "id": "mlbb_172",
+          "label": "172 Diamonds",
+          "price": 285
+        },
+        {
+          "id": "mlbb_257",
+          "label": "257 Diamonds",
+          "price": 420
+        },
+        {
+          "id": "mlbb_pass",
+          "label": "Twilight Pass",
+          "price": 890
+        }
+      ]
+    }
+  },
+  "products": [
+    {
+      "id": "p1",
+      "name": "Aluminum Baseball Bat (32\" Pro)",
+      "category": "Gadgets",
+      "price": 1350,
+      "stock": 20,
+      "emoji": "⚾"
+    },
+    {
+      "id": "p2",
+      "name": "QCY Buds ANC HT15 Earbuds",
+      "category": "Gadgets",
+      "price": 2150,
+      "stock": 9,
+      "emoji": "🎧"
+    },
+    {
+      "id": "p3",
+      "name": "Atomic Habits (Bangla Edition)",
+      "category": "Books",
+      "price": 340,
+      "stock": 28,
+      "emoji": "📘"
+    },
+    {
+      "id": "p4",
+      "name": "Startup Bangladesh Blueprint",
+      "category": "Books",
+      "price": 420,
+      "stock": 16,
+      "emoji": "📕"
+    },
+    {
+      "id": "p5",
+      "name": "AR Luxury Black Polo T-Shirt",
+      "category": "Clothing",
+      "price": 690,
+      "stock": 22,
+      "emoji": "👕"
+    },
+    {
+      "id": "p6",
+      "name": "Premium Cotton Hoodie (Dark)",
+      "category": "Clothing",
+      "price": 1150,
+      "stock": 11,
+      "emoji": "🧥"
+    }
+  ],
+  "shopCategories": [
+    "All",
+    "Gadgets",
+    "Books",
+    "Clothing"
+  ],
+  "posts": [
+    {
+      "id": "post_1794908058911",
+      "author": "Foisal Ahamed",
+      "verified": true,
+      "badge": "Mention Bonus +1🪙",
+      "time": "এইমাত্র",
+      "content": "আলহামদুলিল্লাহ, @PayX.Market দিয়ে মাত্র ৩ সেকেন্ডে রিচার্জ ও টপ-আপ পেলাম! বেস্ট প্ল্যাটফর্ম।",
+      "likes": 1,
+      "liked": true,
+      "comments": []
+    },
+    {
+      "id": "post1",
+      "author": "Admin AR Group",
+      "verified": true,
+      "badge": "Official",
+      "time": "এইমাত্র",
+      "content": "স্বাগতম @PayX.Market প্ল্যাটফর্মে! আমাদের অটোমেটিক পেমেন্ট গেটওয়ে, মোবাইল রিচার্জ এবং ফিজিক্যাল শপ সম্পর্কে আপনার মতামত শেয়ার করুন।",
+      "likes": 42,
+      "liked": false,
+      "comments": [
+        "অসাধারণ সার্ভিস ভাই! ৫ সেকেন্ডে রিচার্জ পেয়েছি।"
+      ]
+    },
+    {
+      "id": "post2",
+      "author": "Tanvir Ahmed",
+      "verified": true,
+      "badge": "Top Reviewer",
+      "time": "২৫ মিনিট আগে",
+      "content": "@PayX.Market থেকে PUBG 325 UC টপ-আপ করলাম, সাথে সাথেই একাউন্টে চলে এসেছে এবং রিওয়ার্ড কয়েনও পেলাম!",
+      "likes": 19,
+      "liked": true,
+      "comments": []
+    }
+  ],
+  "ledger": [
+    {
+      "id": "TXN-5678",
+      "title": "Reward Coins Redeemed (125 Coins → ৳125 BDT)",
+      "amount": 125,
+      "type": "credit",
+      "status": "Completed",
+      "time": "এইমাত্র",
+      "timestamp": "2026-11-18T22:18:32.297Z"
+    },
+    {
+      "id": "TXN-2339",
+      "title": "Reward Coins Redeemed (46 Coins → ৳46 BDT)",
+      "amount": 46,
+      "type": "credit",
+      "status": "Completed",
+      "time": "এইমাত্র",
+      "timestamp": "2026-11-17T09:34:09.308Z"
+    },
+    {
+      "id": "TXN-3126",
+      "title": "GP Prepaid (01712345678)",
+      "amount": 350,
+      "type": "debit",
+      "status": "Completed",
+      "time": "এইমাত্র",
+      "timestamp": "2026-11-17T09:33:58.181Z"
+    },
+    {
+      "id": "TXN-2755",
+      "title": "অ্যাডমিন ব্যালেন্স অ্যাডজাস্টমেন্ট (কর্তন)",
+      "amount": 500,
+      "type": "debit",
+      "status": "Completed",
+      "time": "এইমাত্র",
+      "timestamp": "2026-11-17T09:33:48.007Z"
+    },
+    {
+      "id": "TXN-6364",
+      "title": "অ্যাডমিন ব্যালেন্স অ্যাডজাস্টমেন্ট (যুক্ত)",
+      "amount": 500,
+      "type": "credit",
+      "status": "Completed",
+      "time": "এইমাত্র",
+      "timestamp": "2026-11-17T09:33:34.397Z"
+    },
+    {
+      "id": "TXN-9042",
+      "title": "GP Mobile Recharge (01711-XXXXXX)",
+      "amount": 100,
+      "type": "debit",
+      "status": "Completed",
+      "time": "আজ, ০৯:৪৫ PM",
+      "timestamp": "2026-11-17T08:00:00Z"
+    },
+    {
+      "id": "TXN-9041",
+      "title": "PUBG Mobile 60 UC Top-up",
+      "amount": 110,
+      "type": "debit",
+      "status": "Completed",
+      "time": "আজ, ০৮:২০ PM",
+      "timestamp": "2026-11-17T07:20:00Z"
+    },
+    {
+      "id": "TXN-9039",
+      "title": "QCY Buds ANC HT15 Order",
+      "amount": 2150,
+      "type": "debit",
+      "status": "Pending",
+      "time": "গতকাল",
+      "timestamp": "2026-11-16T12:00:00Z"
+    },
+    {
+      "id": "TXN-9035",
+      "title": "bKash Instant Add Money",
+      "amount": 1000,
+      "type": "credit",
+      "status": "Completed",
+      "time": "গতকাল",
+      "timestamp": "2026-11-16T10:00:00Z"
+    }
+  ],
+  "users": [
+    {
+      "id": "USR-01934109081",
+      "phone": "01934109081",
+      "name": "Foisal Ahamed",
+      "email": "foisal@payx.market",
+      "profession": "Software Engineer",
+      "location": "Araihazar, Narayanganj",
+      "walletBalance": 1146,
+      "rewardCoins": 125,
+      "lifetimeSpend": 1000,
+      "isVipMember": false,
+      "isVerified": true,
+      "role": "user"
+    }
+  ],
+  "metrics": {
+    "totalRevenue": 48920,
+    "netProfit": 6480,
+    "activeUsers": 1284,
+    "newCustomers": 342,
+    "referredCustomers": 418,
+    "repeatCustomers": 524,
+    "locations": {
+      "dhaka": 48,
+      "chattogram": 22,
+      "sylhet": 12,
+      "others": 18
+    },
+    "salaries": [
+      {
+        "role": "মডারেটর ও সাপোর্ট টিম (৩ জন)",
+        "amount": "৳24,000 / মাস",
+        "status": "Paid"
+      },
+      {
+        "role": "AR Group রিজার্ভ ফান্ড",
+        "amount": "৳18,500",
+        "status": "Available"
+      }
+    ]
+  },
+  "deposits": [
+    {
+      "id": "DEP-101",
+      "userName": "Foisal Ahamed",
+      "userPhone": "01934109081",
+      "method": "bKash Auto",
+      "amount": 500,
+      "trxId": "9KJ28FA1",
+      "targetBalance": "মূল ব্যালেন্স",
+      "status": "অনুমোদিত"
+    },
+    {
+      "id": "DEP-102",
+      "userName": "Foisal Ahamed",
+      "userPhone": "01934109081",
+      "method": "Nagad Manual",
+      "amount": 1000,
+      "trxId": "NG78210D",
+      "targetBalance": "ড্রাইভ ব্যালেন্স",
+      "status": "পেন্ডিং"
+    }
+  ],
+  "specialOffers": [
+    {
+      "id": "so1",
+      "op": "Robi",
+      "opName": "Robi",
+      "title": "রবি বোনাস প্যাক",
+      "desc": "৳312 রিচার্জ",
+      "reward": "+1 Coin",
+      "amount": 312,
+      "bg": "linear-gradient(135deg, #74152F 0%, #A71945 100%)",
+      "accent": "#D83C65",
+      "isCrown": true,
+      "active": true
+    },
+    {
+      "id": "so2",
+      "op": "GP",
+      "opName": "GP",
+      "title": "জিপি ইন্টারনেট",
+      "desc": "স্পেশাল অফার",
+      "reward": "🔥 Up to 20%",
+      "amount": 249,
+      "bg": "linear-gradient(135deg, #0755A4 0%, #06376D 100%)",
+      "accent": "#1687E8",
+      "isCrown": false,
+      "active": true
+    },
+    {
+      "id": "so3",
+      "op": "Airtel",
+      "opName": "Airtel",
+      "title": "এয়ারটেল প্যাক",
+      "desc": "রিচার্জ বোনাস",
+      "reward": "+1 Coin",
+      "amount": 312,
+      "bg": "linear-gradient(135deg, #9B2918 0%, #59170F 100%)",
+      "accent": "#E34B2D",
+      "isCrown": false,
+      "active": true
+    },
+    {
+      "id": "so4",
+      "op": "BL",
+      "opName": "Banglalink",
+      "title": "বাংলালিংক স্পেশাল",
+      "desc": "৫০GB মেগা প্যাক",
+      "reward": "৳২৫ ছাড়",
+      "amount": 498,
+      "bg": "#4A2208",
+      "accent": "#F37021",
+      "isCrown": false,
+      "active": true
+    },
+    {
+      "id": "so5",
+      "op": "TT",
+      "opName": "Teletalk",
+      "title": "টেলিটক বর্ণমালা",
+      "desc": "সাশ্রয়ী টকটাইম",
+      "reward": "১০% বোনাস",
+      "amount": 98,
+      "bg": "#183B1A",
+      "accent": "#2ECC71",
+      "isCrown": false,
+      "active": true
+    }
+  ],
+  "announcements": [
+    {
+      "id": "ann1",
+      "text": "নতুন: এখন থেকে প্রতিটি রিচার্জে রিওয়ার্ড কয়েন পাবেন!",
+      "icon": "✅",
+      "active": true,
+      "date": "2026-11-18"
+    },
+    {
+      "id": "ann2",
+      "text": "ড্রাইভ প্যাকের সকল অফারে লাইভ ক্যাশব্যাক স্টক সক্রিয় রয়েছে!",
+      "icon": "🚀",
+      "active": true,
+      "date": "2026-11-18"
+    },
+    {
+      "id": "ann3",
+      "text": "বিকাশ ও নগদ অটো ব্যালেন্স অ্যাড মানি সিস্টেম ১০০% চালু আছে!",
+      "icon": "⚡",
+      "active": true,
+      "date": "2026-11-18"
+    },
+    {
+      "id": "ann4",
+      "text": "আজকের স্পেশাল অফারে রবি ও এয়ারটেলে ইনস্ট্যান্ট ক্যাশব্যাক!",
+      "icon": "🔥",
+      "active": true,
+      "date": "2026-11-18"
+    }
+  ]
+}
