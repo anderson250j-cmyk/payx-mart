@@ -896,21 +896,21 @@
          ========================================================= -->
     <main id="panel-recharge" class="tab-panel active" style="gap: 8px;">
       <!-- ==================== NEW SECTION 01: আজকের স্পেশাল অফার ==================== -->
-      <div id="section-special-offers" class="w-[calc(100%-18px)] max-w-[462px] mx-auto p-[14px] sm:p-[16px] rounded-[26px] border border-[#57252B] flex flex-col gap-[12px] shadow-[0_4px_16px_rgba(0,0,0,0.30)] select-none my-[10px] overflow-hidden" style="background: linear-gradient(135deg, #210B0D 0%, #160808 100%);">
+      <div id="section-special-offers" class="w-[calc(100%-18px)] max-w-[462px] mx-auto p-[10px] sm:p-[12px] rounded-[21px] border border-[#57252B] flex flex-col gap-[7px] shadow-[0_3px_12px_rgba(0,0,0,0.25)] select-none my-[8px] overflow-hidden" style="background: linear-gradient(135deg, #1C0F10 0%, #15090A 100%);">
         <!-- Section Header -->
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <span class="text-[22px] sm:text-[25px] leading-none select-none">🔥</span>
-            <h3 class="font-display font-extrabold text-[18px] sm:text-[21px] text-[#FFF8F0] leading-none">আজকের স্পেশাল অফার</h3>
+        <div class="h-[20px] flex items-center justify-between">
+          <div class="flex items-center gap-1.5">
+            <span class="text-[17px] leading-none select-none">🔥</span>
+            <h3 class="font-display font-extrabold text-[15px] sm:text-[16px] text-[#FFF8F0] leading-none">আজকের স্পেশাল অফার</h3>
           </div>
-          <button type="button" onclick="openAllOffersModal()" class="h-[28px] sm:h-[30px] px-3 sm:px-3.5 rounded-full border border-[#9B7620] text-[12px] sm:text-[13px] font-bold text-[#FFC400] flex items-center gap-1 transition active:scale-95 cursor-pointer hover:bg-[#FFC400]/10 shrink-0" style="background: #2A1011;">
+          <button type="button" onclick="openAllOffersModal()" class="h-[22px] px-2.5 rounded-full border border-[#9B7620] text-[10px] font-bold text-[#FFC400] flex items-center gap-0.5 transition active:scale-95 cursor-pointer hover:bg-[#FFC400]/10 shrink-0" style="background: #2A1011;">
             <span>সব অফার</span>
-            <span class="text-[12px] font-bold">&gt;</span>
+            <span class="text-[10px] font-bold">&gt;</span>
           </button>
         </div>
 
         <!-- Three Horizontal Offer Cards in Exactly 1 Row (3 equal columns) -->
-        <div class="grid grid-cols-3 gap-2 sm:gap-2.5 w-full" id="special-offers-carousel">
+        <div class="grid grid-cols-3 gap-[7px] w-full" id="special-offers-carousel">
           <!-- Rendered dynamically by renderSpecialOffers() from db.specialOffers -->
         </div>
       </div>
@@ -3709,22 +3709,22 @@
       });
 
       container.innerHTML = list.map(offer => {
-        const opLogo = getOpLogoImg(offer.op, 'w-[22px] h-[22px] sm:w-[25px] sm:h-[25px]');
+        const opLogo = getOpLogoImg(offer.op, 'w-[15px] h-[15px] sm:w-[17px] sm:h-[17px]');
         return `
           <div onclick="applySpecialOffer('${offer.id}')"
-               class="relative h-[176px] min-h-[176px] rounded-[27px] p-[10px_7px_9px] sm:p-[12px_9px_10px] flex flex-col justify-between overflow-hidden cursor-pointer transition-all duration-200 active:scale-95 select-none group box-border shadow-[0_4px_14px_rgba(0,0,0,0.35),inset_0_1px_0_rgba(255,225,120,0.2)]"
-               style="background: linear-gradient(145deg, #650B20 0%, #850D2A 55%, #4D0719 100%); border: 1.5px solid #D99B16;">
+               class="relative h-[106px] sm:h-[110px] rounded-[16px] p-[6px_6px_6px] flex flex-col justify-between overflow-hidden cursor-pointer transition-all duration-200 active:scale-95 select-none group box-border shadow-[0_3px_10px_rgba(0,0,0,0.3)]"
+               style="background: linear-gradient(145deg, #650B20 0%, #7A0C26 50%, #4D0719 100%); border: 1.5px solid #D99B16;">
             
             <!-- Curved Golden Corner Decoration -->
-            <div class="absolute -top-1 -right-1 w-[42px] h-[42px] bg-[#F6BD16] rounded-bl-[36px] pointer-events-none z-0"></div>
+            <div class="absolute -top-1 -right-1 w-6 h-6 bg-[#FFC400] rounded-bl-[16px] pointer-events-none z-0"></div>
 
             <!-- Top row: Crown + Operator Name + Transparent Official Brand Logo -->
-            <div class="h-[35px] flex items-center justify-between w-full relative z-10 px-1 sm:px-1.5">
-              <div class="flex items-center gap-1 sm:gap-1.5 min-w-0">
-                <svg class="w-[18px] h-[18px] sm:w-[20px] sm:h-[20px] text-[#FFD21C] shrink-0" viewBox="0 0 24 24" fill="currentColor">
+            <div class="h-[18px] flex items-center justify-between w-full relative z-10 px-0.5">
+              <div class="flex items-center gap-1 min-w-0">
+                <svg class="w-3.5 h-3.5 text-[#FFC400] shrink-0" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/>
                 </svg>
-                <span class="text-[13px] xs:text-[14px] sm:text-[16px] font-bold text-white leading-none whitespace-nowrap">${offer.opName}</span>
+                <span class="text-[11px] sm:text-[12px] font-bold text-white leading-none whitespace-nowrap">${offer.opName}</span>
               </div>
               <div class="shrink-0 flex items-center justify-center">
                 ${opLogo}
@@ -3733,18 +3733,18 @@
 
             <!-- Middle: Main Heading & Subtitle -->
             <div class="flex flex-col items-center justify-center text-center my-auto py-0.5 relative z-10 w-full min-w-0">
-              <h4 class="text-[14px] xs:text-[15px] sm:text-[17px] font-extrabold text-[#FFF8F1] leading-[1.3] text-center tracking-tight drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
+              <h4 class="text-[11.5px] sm:text-[12.5px] font-extrabold text-[#FFF8F1] leading-tight text-center tracking-tight whitespace-nowrap">
                 ${offer.title}
               </h4>
-              <p class="text-[12px] sm:text-[13px] font-medium text-[#F2D9D5] text-center mt-1 leading-tight">
+              <p class="text-[9.5px] sm:text-[10px] font-medium text-[#F2D9D5] text-center mt-0.5 leading-none whitespace-nowrap">
                 ${offer.desc || 'স্পেশাল অফার'}
               </p>
             </div>
 
             <!-- Bottom: Yellow CTA Button -->
             <div class="w-full relative z-10">
-              <button type="button" class="w-full h-[38px] sm:h-[41px] rounded-[25px] text-[#17100A] text-[13px] sm:text-[15px] font-extrabold flex items-center justify-center gap-1.5 shadow-[0_2px_8px_rgba(255,190,0,0.22)] active:scale-95 leading-none shrink-0 pointer-events-none whitespace-nowrap" style="background: linear-gradient(180deg, #FFD32A 0%, #FFB900 100%);">
-                <span class="text-[13px] sm:text-[14px] leading-none">🔥</span>
+              <button type="button" class="w-full h-[22px] sm:h-[24px] rounded-full text-[#17100A] text-[10px] sm:text-[10.5px] font-black flex items-center justify-center gap-1 shadow-sm active:scale-95 leading-none shrink-0 pointer-events-none whitespace-nowrap" style="background: #FFC400;">
+                <span class="text-[10px] leading-none">🔥</span>
                 <span>Up to 20%</span>
               </button>
             </div>
